@@ -26,8 +26,8 @@ namespace Product_Review_Management
                productReviews.Add(new ProductReview() { productID = 15, userID = 7, rating = 4, review = "poor", isLike = false });
             
             Console.WriteLine("Added succesfully");
-            //Calling the function to skip the top 5 records and display the others
-            ProductAdapter.SkipTopFiveRecords(productReviews);
+            //Calling the function to display the records where isLike is true
+            ProductAdapter.GetIsLikeTrue(productReviews);
             
         }
     }
