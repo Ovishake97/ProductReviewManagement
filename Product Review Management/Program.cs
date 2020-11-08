@@ -26,8 +26,8 @@ namespace Product_Review_Management
                productReviews.Add(new ProductReview() { productID = 15, userID = 7, rating = 4, review = "poor", isLike = false });
             
             Console.WriteLine("Added succesfully");
-            //Calling the function to display records of the products having rating more than 3 
-            ProductAdapter.GetRecordsForRatings(productReviews);
+            //Calling the function to display product id and reviews
+            ProductAdapter.GetProductIDAndReviews(productReviews);
             
         }
     }
