@@ -42,12 +42,7 @@ namespace Product_Review_Management
                 row["IsLike"] = Convert.ToString(item.isLike);
                 productTable.Rows.Add(row);
             }
-            var data = from products in productTable.AsEnumerable()
-                       select products.Field<string>("ProductID");
-            foreach (string name in data) {
-                Console.WriteLine(name);
-            }
-            
+            ProductAdapter.GetIsLikeTrue(productTable);
         }
     }
 }
