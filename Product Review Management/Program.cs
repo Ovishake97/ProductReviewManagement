@@ -42,7 +42,8 @@ namespace Product_Review_Management
                 row["IsLike"] = Convert.ToString(item.isLike);
                 productTable.Rows.Add(row);
             }
-            ProductAdapter.GetIsLikeTrue(productTable);
+            //Calling the method to display the average rating for each productid
+            ProductAdapter.GetAverageRating(productReviews);
         }
     }
 }

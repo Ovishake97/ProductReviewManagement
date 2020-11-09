@@ -70,11 +70,11 @@ namespace Product_Review_Management
         /// Method to get the count per productid
         public static void FindingCount(List<ProductReview> list)
         {
-            var data = list.GroupBy(p => p.productID).Select(x => new { productID = x.Key, count = x.Count() });
+            var data = list.GroupBy(p => p.productID).Select(x => new { productID = x.Key, average = x.Count() });
             foreach (var elements in data)
             {
                 Console.WriteLine("ProductID: " + elements.productID);
-                Console.WriteLine("Count :" + elements.count);
+                Console.WriteLine("Count :" + elements.average);
             }
         }
         /// Method to retrieve the productids
@@ -89,6 +89,16 @@ namespace Product_Review_Management
             {
                 Console.WriteLine(elements);
             }
+        }
+        public static void GetAverageRating(List<ProductReview> list) {
+
+            var data = list.GroupBy(p => p.productID).Select(x => new { productID = x.Key, average = x.Average(r=>r.rating) });
+            foreach (var elements in data)
+            {
+                Console.WriteLine("ProductID: " + elements.productID);
+                Console.WriteLine("Average :" + elements.average);
+            }
+
         }
     }
 }
