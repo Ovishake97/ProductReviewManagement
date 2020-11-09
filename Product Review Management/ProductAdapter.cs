@@ -4,18 +4,21 @@ using System.Text;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.ComponentModel.Design;
+using System.Data;
 
 namespace Product_Review_Management
 {
-   public class ProductAdapter
+    public class ProductAdapter
     {
         /// Method to print the top 3 products according to the ratings
         /// using linq command
-        public static void RetrieveTopData(List<ProductReview> list) {
+        public static void RetrieveTopData(List<ProductReview> list)
+        {
             var data = (from products in list
                         orderby products.rating descending
                         select products).Take(3);
-            foreach (var element in data) {
+            foreach (var element in data)
+            {
                 Console.WriteLine(element.productID);
                 Console.WriteLine(element.rating);
                 Console.WriteLine(element.review);
@@ -24,9 +27,11 @@ namespace Product_Review_Management
         }
         /// Method to retrieve the records whose rating is greater than 3
         /// and product id is either 1 or 4 or 9
-        public static void GetRecordsForRatings(List<ProductReview> list) {
+        public static void GetRecordsForRatings(List<ProductReview> list)
+        {
             var data = (list.Where(r => r.rating > 3 && r.productID == 1 || r.productID == 4 || r.productID == 9));
-            foreach (var element in data) {
+            foreach (var element in data)
+            {
                 Console.WriteLine(element.productID);
                 Console.WriteLine(element.rating);
                 Console.WriteLine(element.review);
@@ -34,9 +39,10 @@ namespace Product_Review_Management
             }
         }
         /// Method to print only product id and reviews
-        public static void GetProductIDAndReviews(List<ProductReview> list) {
+        public static void GetProductIDAndReviews(List<ProductReview> list)
+        {
             var data = (from products in list
-                                 select products);
+                        select products);
             foreach (var element in data)
             {
                 Console.WriteLine(element.productID);
@@ -62,13 +68,27 @@ namespace Product_Review_Management
 
         }
         /// Method to get the count per productid
-        public static void FindingCount(List<ProductReview> list) {
-            var data = list.GroupBy(p => p.productID).Select(x => new { productID=x.Key,count=x.Count()});
-            foreach (var elements in data) {
-                Console.WriteLine("ProductID: "+elements.productID);
-                Console.WriteLine("Count :"+elements.count);
+        public static void FindingCount(List<ProductReview> list)
+        {
+            var data = list.GroupBy(p => p.productID).Select(x => new { productID = x.Key, count = x.Count() });
+            foreach (var elements in data)
+            {
+                Console.WriteLine("ProductID: " + elements.productID);
+                Console.WriteLine("Count :" + elements.count);
             }
         }
-        
+        /// Method to retrieve the productids
+        /// where the IsLike column is true
+        public static void GetIsLikeTrue(DataTable table)
+        {
+            var datarow = table.AsEnumerable().Where(p => p.Field<string>("IsLike").ToLower().Equals("true"));
+            DataTable result = datarow.CopyToDataTable<DataRow>();
+            var data = from products in result.AsEnumerable()
+                       select products.Field<string>("ProductID");
+            foreach (string elements in data)
+            {
+                Console.WriteLine(elements);
+            }
+        }
     }
 }
