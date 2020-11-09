@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Product_Review_Management
 {
@@ -24,10 +25,28 @@ namespace Product_Review_Management
                productReviews.Add(new ProductReview() { productID = 13, userID = 6, rating = 5, review = "average", isLike = true });
                productReviews.Add(new ProductReview() { productID = 14, userID = 5, rating = 7, review = "good", isLike = true });
                productReviews.Add(new ProductReview() { productID = 15, userID = 7, rating = 4, review = "poor", isLike = false });
-            
-            Console.WriteLine("Added succesfully");
-            //Calling the function to display the count per product id
-            ProductAdapter.FindingCount(productReviews);
+
+            //Adding the elements from the list to a datatable
+            DataTable productTable = new DataTable();
+            productTable.Columns.Add("ProductID");
+            productTable.Columns.Add("UserID");
+            productTable.Columns.Add("Rating");
+            productTable.Columns.Add("Review");
+            productTable.Columns.Add("IsLike");
+            foreach (var item in productReviews) {
+                var row = productTable.NewRow();
+                row["ProductID"] = Convert.ToString(item.productID);
+                row["UserID"] = Convert.ToString(item.userID);
+                row["Rating"] = Convert.ToString(item.rating);
+                row["Review"] = item.review;
+                row["IsLike"] = Convert.ToString(item.isLike);
+                productTable.Rows.Add(row);
+            }
+            var data = from products in productTable.AsEnumerable()
+                       select products.Field<string>("ProductID");
+            foreach (string name in data) {
+                Console.WriteLine(name);
+            }
             
         }
     }
