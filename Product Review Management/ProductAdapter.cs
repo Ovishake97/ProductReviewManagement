@@ -90,6 +90,7 @@ namespace Product_Review_Management
                 Console.WriteLine(elements);
             }
         }
+        /// Getting average rating per productid
         public static void GetAverageRating(List<ProductReview> list) {
 
             var data = list.GroupBy(p => p.productID).Select(x => new { productID = x.Key, average = x.Average(r=>r.rating) });
@@ -98,7 +99,19 @@ namespace Product_Review_Management
                 Console.WriteLine("ProductID: " + elements.productID);
                 Console.WriteLine("Average :" + elements.average);
             }
-
+        }
+        /// Method to retrieve all the data where the
+        /// review is "nice"
+        public static void GetNice(List<ProductReview> list) {
+            var data = list.Where(p => p.review.ToLower().Equals("nice"));
+            foreach (var element in data)
+            {
+                Console.WriteLine(element.productID);
+                Console.WriteLine(element.userID);
+                Console.WriteLine(element.rating);
+                Console.WriteLine(element.review);
+                Console.WriteLine("-----------");
+            }
         }
     }
 }

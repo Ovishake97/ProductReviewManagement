@@ -12,12 +12,12 @@ namespace Product_Review_Management
             List<ProductReview> productReviews = new List<ProductReview>();
                productReviews.Add(new ProductReview() { productID = 1, userID = 1, rating = 4, review = "poor", isLike = false });
                productReviews.Add (new ProductReview() { productID = 2, userID = 3, rating = 6, review = "average", isLike = true });
-               productReviews.Add(new ProductReview() { productID = 3, userID = 2, rating = 8, review = "good", isLike = true });
+               productReviews.Add(new ProductReview() { productID = 3, userID = 2, rating = 8, review = "nice", isLike = true });
                productReviews.Add(new ProductReview() { productID = 4, userID = 7, rating = 5, review = "average", isLike = true });
                productReviews.Add(new ProductReview() { productID = 5, userID = 1, rating = 3, review = "poor", isLike = false });
                productReviews.Add(new ProductReview() { productID = 6, userID = 2, rating = 4, review = "poor", isLike = false });
                productReviews.Add(new ProductReview() { productID = 7, userID = 5, rating = 7, review = "good", isLike = true });
-               productReviews.Add(new ProductReview() { productID = 8, userID = 3, rating = 9, review = "good", isLike = true });
+               productReviews.Add(new ProductReview() { productID = 8, userID = 3, rating = 9, review = "nice", isLike = true });
                productReviews.Add(new ProductReview() { productID = 9, userID = 6, rating = 5, review = "average", isLike = true });
                productReviews.Add(new ProductReview() { productID = 10, userID = 4, rating = 6, review = "good", isLike = true });
                productReviews.Add(new ProductReview() { productID = 11, userID = 2, rating = 7, review = "good", isLike = true });
@@ -42,8 +42,8 @@ namespace Product_Review_Management
                 row["IsLike"] = Convert.ToString(item.isLike);
                 productTable.Rows.Add(row);
             }
-            //Calling the method to display the average rating for each productid
-            ProductAdapter.GetAverageRating(productReviews);
+            //Calling the method to display the records where the review is "nice"
+            ProductAdapter.GetNice(productReviews);
         }
     }
 }
