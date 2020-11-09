@@ -42,8 +42,12 @@ namespace Product_Review_Management
                 row["IsLike"] = Convert.ToString(item.isLike);
                 productTable.Rows.Add(row);
             }
-            //Calling the method to display the records where the review is "nice"
-            ProductAdapter.GetNice(productReviews);
+            productTable.Rows.Add("16", "10", "7", "Good", "true");
+            productTable.Rows.Add("17", "10", "5", "Average", "true");
+            productTable.Rows.Add("18", "10", "3", "Poor", "false");
+            productTable.Rows.Add("19", "10", "9", "Nice", "true");
+            //Printing the rows where the user id is 10 
+            ProductAdapter.GetRowsForUserID(productTable);
         }
     }
 }

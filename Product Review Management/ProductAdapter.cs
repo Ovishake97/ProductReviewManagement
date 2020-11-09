@@ -113,5 +113,18 @@ namespace Product_Review_Management
                 Console.WriteLine("-----------");
             }
         }
+        /// Method to retrieve all the data where the userId is 10
+        public static void GetRowsForUserID(DataTable table) {
+            var datarow = table.AsEnumerable().Where(p => p.Field<string>("UserID").Equals("10"));
+            DataTable result = datarow.CopyToDataTable<DataRow>();
+            Console.WriteLine("ProductID---||---UserID---||--Rating--||--Review--||--IsLike--");
+            foreach (DataRow dataRow in result.Rows)
+            {
+                foreach (var item in dataRow.ItemArray)
+                {
+                    Console.Write("\t"+item);
+                }
+            }
+        }
     }
 }
